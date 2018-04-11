@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,7 +25,7 @@ SECRET_KEY = ')j-z7eeab=y+1#$ptk=137%(6_-c=07d*(o96x18oe*dx0+da)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +40,6 @@ INSTALLED_APPS = [
     'courses',
     'django.contrib.humanize',
     'widget_tweaks',
-    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -121,12 +121,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # new!
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'assets'),
-]
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'assets', 'media')
-MEDIA_URL = '/media/'
+django_heroku.settings(locals())
 
 LOGIN_REDIRECT_URL = '/courses'
