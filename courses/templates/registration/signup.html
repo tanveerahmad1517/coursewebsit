@@ -1,0 +1,13 @@
+{% extends "courses/base.html" %}
+{% block content %}
+ <div class="container" >
+  <div class="row">
+<h2>Sign up</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="no-border" type="submit"> <a class="waves-effect waves-light btn-large">Signup</a></button>
+</form>
+</div>
+</div>
+{% endblock %}

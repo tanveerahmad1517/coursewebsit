@@ -1,0 +1,77 @@
+{% extends "courses/layout.html" %}
+{% block title %} {{ course.title }} {% endblock %}
+{% block course_content %}
+
+
+<div class="container">
+ <div class="row">
+    <div class="cover_img">
+         <img class="responsive-img" src="{{ course.image.url }}" height="150">
+    </div>
+  <div class="col s12 col m8"> 
+       
+        <h3> About This Course </h3>
+        <h4> {{ course.title }} </h4>
+            <p> {{ course.description }} </p>
+
+ </div>
+                     
+ <div class="col s12 col m4"> 
+       
+
+
+        <h5>  {{ course.teacher.name }}</h5>
+         <img class="responsive-img circle teacher_img" src="{{ course.teacher.image.url }}" height="150">
+            <p> {{ course.teacher.description }} </p>
+
+</div>
+</div>
+<div class="divider"></div>
+    <div class="related_topic">
+            <h3> Related To This Topic </h3>
+        {% for step in course.step_set.all %}
+ <div class="row">
+  <div class="col s12 m4">
+   <div class="card">
+ <div class="card-image">
+            <img class="responsive-img" src="{{ step.related_image.url }}" height="150">
+        <h5>
+            <a href="{% url 'courses:step' course_pk=step.course.pk step_pk=step.pk %}">{{step.related_title }}</a>
+        </h5>
+        {% if user.is_authenticated and course.user == user and not hide_delete %}
+   <div class="fixed-action-btn toolbar direction-top" style="transition: transform 0.2s; transform: translate3d(0px, 0px, 0px);">
+      <a class="btn-floating btn-large red" style="transition: transform 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19); transform: translate3d(0px, 0px, 0px);">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+      <ul>
+        <li class="waves-effect waves-light"><a href="#!" style=""><i class="material-icons">insert_chart</i></a></li>
+        <li class="waves-effect waves-light"><a href="{% url 'courses:edit_step_detail' course_pk=step.course.pk step_pk=step.pk %}" style=""><i class="material-icons dp48">edit</i></a></li>
+        <li class="waves-effect waves-light"><a href="{% url 'courses:delete_step_detail' course_pk=step.course.pk step_pk=step.pk %}" style=""><i class="material-icons dp48">delete</i></a></li>
+        <li class="waves-effect waves-light"><a href="" style=""><i class="material-icons">attach_file</i></a></li>
+      </ul>
+    </div>
+        {% endif %}
+
+        
+   
+    </div>
+ </div>
+<div class="card-content">
+            <p>{{ step.related_description|slice:":125" }}<a href="{% url 'courses:step' course_pk=step.course.pk step_pk=step.pk %}"> Read More</a> </p>
+</div>
+ </div>      
+ {% if forloop.counter|divisibleby:3 and not forloop.last %}
+        </div><br><div class="row">
+      {% endif %}
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+{% endblock %}
+
+
+

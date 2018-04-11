@@ -1,0 +1,48 @@
+{% extends "courses/layout.html" %}
+{% load widget_tweaks %}
+{% block course_content %}
+
+ <div class="container" >
+  <form method="post" enctype="multipart/form-data">
+      <div class="row">
+     <div class="input-field col s12">
+        {% render_field form.title|add_class:'validate' %}
+        <label for="title"> Title </label>
+     </div>
+     <div class="input-field col s12">
+       {% render_field form.description placeholder="Write Description"|add_class:'materialize-textarea'  %}
+       <label for="title"> Description </label>
+         
+     </div>
+     <div class="input-field col s12">
+       {% render_field form.teacher|add_class:'select-dropdown dropdown-trigger'  %}
+       <label for="title"> Teacher </label>
+         </div>
+     </div>
+ <div class="file-field input-field cols12 m12">
+  {% if form.image.value %}
+  <div class="col s2 m2 12">
+    <span class="thumbnail">Thumbnail</span>
+    <img class="responsive-img thumbnail" src="/media/{{ form.image.value }}">
+  </div>
+  {% endif %}
+  <br><br>
+  <div class="btn">
+    <span> {{ form.image.label }}</span>
+    <input type="file" name="{{ form.image.html_name }}">
+  </div>
+  <div class="file-path-wrapper">
+  <input class="file-path validate" type="text">
+</div>
+</div>
+    <button type="submit" class="btn btn-success">
+        <span class="glyphicon glyphicon-ok"></span> Save
+    </button>
+      <a href="{% url 'courses:course_list' %}" class="btn btn-default">Cancel</a>
+    {% csrf_token %}
+  </form>
+  <br>
+ </div><!-- container -->
+ {% endblock %}
+
+

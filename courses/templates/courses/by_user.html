@@ -1,0 +1,7 @@
+{% extends "courses/layout.html" %}
+{% block title %} {{ course.title }} {% endblock %}
+{% block course_content %}
+<div class="col-md-8">
+    {% include "courses/_course.html" %}
+</div>
+{% endblock %}

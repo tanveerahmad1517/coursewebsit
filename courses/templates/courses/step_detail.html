@@ -1,0 +1,53 @@
+{% extends "courses/layout.html" %}
+{% block title %} {{ step.related_title }} {% endblock %}
+{% block course_content %}
+
+
+
+<div class="container">
+ <div class="row">
+
+    <div class="cover_img">
+         <img class="responsive-img" src="{{ step.related_image.url }}" height="150">
+    </div>
+    	<br>
+    	  <nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+        
+        <a href="{% url 'courses:course_list' %}"" class="breadcrumb">Courses </a>
+        <a href="{% url 'courses:course_detail' step.course.pk %}"" class="breadcrumb">{{ step.course.title }}</a>
+        <a href="#!" class="breadcrumb">{{ step.related_title }}</a>
+      </div>
+    </div>
+  </nav>
+            
+ 	
+  <div class="col s12 col m8"> 
+       
+        <h3> About This Course </h3>
+        <h4> {{ step.related_title }} </h4>
+            <p> {{ step.related_description }} </p>
+ </div>
+        
+
+
+ <div class="col s12 col m4"> 
+       
+
+
+        <h5>  {{ step.related_teacher.name }}</h5>
+         <img class="responsive-img circle teacher_img" src="{{ step.related_teacher.image.url }}" height="150">
+            <p> {{ step.related_teacher.description }} </p>
+
+</div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+

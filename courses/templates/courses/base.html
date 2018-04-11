@@ -1,0 +1,102 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title> {% block title %} {% endblock %} </title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+</head>
+<body>
+
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="container">
+    <div class="row">
+  <div class="col s2">
+    
+    <div class="nav-wrapper container"><a id="logo-container" href="{% url 'courses:course_list' %}" class="brand-logo">My App</a>
+
+    </div></div>
+
+      <div class="col s6">
+         {% include "search_form.html" %} 
+    
+       </div>
+   
+         
+         <div class="col s4">
+    
+      <ul class="right hide-on-med-and-down">
+       {% if user.is_authenticated %}
+       <li><a href="{{ request.user.profiles.get_absolute_url }}">{{user}}</a></li>
+        
+        	<li><a href="{% url 'courses:create_course'%}">Create Post</a></li>
+
+        	<li><a href="{% url 'logout' %}"> Logout </a></li>        	
+       {% else %}
+       		<li> <a href="{% url 'login' %}">Log in </a></li>
+          <li> <a href="{% url 'password_reset' %}">Lost password?</a>
+          
+          
+       {% endif %}
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+       {% if user.is_authenticated %}
+        	<li><a href="#">:{{user}}</a></li>
+
+     
+        	<li><a href="{% url 'logout' %}?next=/"> Logout </a></li>
+        	
+       {% else %}
+       		<li> <a href="/login/?next=/">Log in </a></li>
+       {% endif %}
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </li>
+</ul>
+</div>
+  </nav>
+
+
+  
+
+{% block content %}
+{% endblock content %}
+
+
+{% block footer %}
+<footer class="light-blue lighten-1" role="navigation">
+<div class="footer-copyright">
+      <div class="container">
+      Made by <span class="#f57f17 yellow darken-4">     </span>
+      </div>
+    </div>
+</footer>
+{% endblock footer %}
+
+
+
+
+ <!--  Scripts-->
+  <script src="{% static 'js/jquery.js' %}"></script>
+  <script src="{% static 'js/materialize.js' %}"></script>
+  <script src="{% static 'js/init.js' %}"></script>
+   <script src="{% static 'js/drop.js' %}"></script>
+ 
+
+    <script src="{% static 'bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    {% block javascript %}{% endblock %}
+</body>
+</html>

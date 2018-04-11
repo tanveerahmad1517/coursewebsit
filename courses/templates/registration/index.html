@@ -1,0 +1,32 @@
+{% block content %}
+<h3> {{ courses.title }} </h3>
+
+
+    <section>
+        {% for step in courses.step_set.all %}
+            <h3>
+                <a href="{% url 'courses:step' course_pk=step.course.pk step_pk=step.pk %}">{{ step.title }}</a>
+            </h3>
+
+            {{ step.description }}
+        {% endfor %}
+    </section>
+
+
+<h3>  Teachers </h3>
+{% for teacher in courses.teachers.all %}
+
+
+<b> Name </b>: {{ teacher.name }} <br>
+<div class="treasure-photo">
+            <img src="{{ teacher.image.url }}">
+          </div>
+
+
+
+
+{% endfor %}
+
+
+
+{% endblock %}
