@@ -2,14 +2,17 @@
 
 url = "https://pypi.python.org/simple"
 verify_ssl = true
+name = "pypi"
 
 
 [packages]
 
 django = "*"
 gunicorn = "*"
-django-heroku = "*"
-whitenoise = "*"
+
+
+[dev-packages]
+
 
 
 [requires]
