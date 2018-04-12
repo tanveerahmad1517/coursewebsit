@@ -5,16 +5,17 @@ verify_ssl = true
 name = "pypi"
 
 
+[requires]
+
+python_version = "3.6"
+
+
 [packages]
 
 django = "*"
 gunicorn = "*"
+whitenoise = "*"
 
 
 [dev-packages]
 
-
-
-[requires]
-
-python_version = "3.6"
