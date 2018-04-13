@@ -1,1 +1,1 @@
-web: gunicorn tanveercourses.wsgi --log-file -
+web: gunicorn coursewebsit.wsgi --log-file -
