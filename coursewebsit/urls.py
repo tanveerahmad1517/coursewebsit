@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import handler404, handler500
+# from django.conf.urls import handler404, handler500
 from .views import SearchView
 from .import views
 from django.views.generic import View
@@ -21,11 +21,11 @@ urlpatterns = [
     
     path('search/', SearchView.as_view(), name='search'), 
     path('accounts/signup/', views.SignUpView.as_view(), name="signup"),
-    url(r'^profile/(?P<username>\w+)/$', views.myprofileview, name="detail_profile")
+    # url(r'^profile/(?P<username>\w+)/$', views.myprofileview, name="detail_profile")
 ]
 
-handler404 = 'courses_views.error_404'
-handler500 = 'courses_views.error_500'
+# handler404 = 'courses_views.error_404'
+# handler500 = 'courses_views.error_500'
 
 
 
