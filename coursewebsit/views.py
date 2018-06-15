@@ -30,5 +30,10 @@ class SignUpView(CreateView):
 
 def myprofileview(request, username):
     user = User.objects.get(user = request.user)
-    return render(request,'profile.html',{'user':user})
-            
+    return rende(request,'profile.html',{'user':user})
+    
+
+
+
+
+

@@ -65,7 +65,7 @@ class CreateStep(LoginRequiredMixin, CreateView):
 
 
 
-class EditView(UpdateView):
+class EditView(LoginRequiredMixin, UpdateView):
 	model = Course
 	fields = ['title', 'description', 'teacher', 'image']
 	template_name = 'courses/edit_course.html'
@@ -102,7 +102,7 @@ class DeletePost(LoginRequiredMixin, DeleteView):
         messages.success(self.request, "Message successfully deleted")
         return super().delete(*args, **kwargs)
 
-class EditView(UpdateView):
+class EditView(LoginRequiredMixin, UpdateView):
     model = Course
     fields = ['title', 'description', 'teacher', 'image']
     template_name = 'courses/edit_course.html'
@@ -137,3 +137,12 @@ class MyView(AllPosts):
         @method_decorator(login_required)
         def dispatch(self, *args, **kwargs):
             return super(MyView, self).dispatch(*args, **kwargs)
+
+
+def error_404(request):
+        data = {}
+        return render(request,'courses/error_404.html', data)
+ 
+def error_500(request):
+        data = {}
+        return render(request,'courses/error_500.html', data)    

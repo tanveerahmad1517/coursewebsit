@@ -24,7 +24,8 @@
 
     <ul class="right hide-on-med-and-down">
        {% if user.is_authenticated %}
-       <li><a href="{% url 'courses:myview' %}">{{user }}</a></li>
+  
+     
        <li><a href="{% url 'courses:step_create'%}"> Create Same Topic </a></li>
 
        <li><a href="{% url 'courses:create_course'%}">Create Post</a></li>
@@ -53,7 +54,7 @@
        <li class="rightone"> {% include "search_form.html" %} </li>
     </ul>
 
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </li>
 </ul>
@@ -74,7 +75,7 @@
 <footer class="light-blue lighten-1" role="navigation">
 <div class="footer-copyright">
       <div class="container">
-      Made by <span class="#f57f17 yellow darken-4">     </span>
+      Made By Tanveer Ahmed
       </div>
     </div>
 </footer>

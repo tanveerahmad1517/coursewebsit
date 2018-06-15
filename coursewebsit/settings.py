@@ -23,6 +23,7 @@ SECRET_KEY = ')j-z7eeab=y+1#$ptk=137%(6_-c=07d*(o96x18oe*dx0+da)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     'courses',
     'django.contrib.humanize',
     'widget_tweaks',
+
+
 ]
 
 MIDDLEWARE = [
@@ -117,7 +120,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets', 'static')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -129,4 +132,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'assets', 'media')
 
 
 
-LOGIN_REDIRECT_URL = '/courses'
+LOGIN_REDIRECT_URL = 'courses:course_list'

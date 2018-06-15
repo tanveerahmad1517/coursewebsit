@@ -1,0 +1,103 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+.no-border {
+    border: none;
+    padding: 0px;
+}
+.footer-copyright {
+    padding: 12px 0px 12px 0px;
+}
+.footer-copyright a {
+    color: blue;
+}
+
+input.btn.btn-default {
+    float: left;
+    margin-top: 17px;
+}
+ .form-group {
+    float: left !important;
+}
+
+img.teacher_img {
+	height: 70px;
+    padding: 0px;
+    margin: 0px;
+    float: right;
+    margin-top: -44px;
+}
+.cover_img img {
+    background-size: cover;
+    width: 100%;
+    height: 279px;
+}
+.divider {
+    height: 5px !important;
+}
+
+.related_topic h3 {
+    margin-top: 12px;
+}
+.nav-wrapper {
+    background: #29b6f6 !important;
+}
+.btn-floating.halfway-fab {
+    bottom: 23px !important;
+}
+.fixed-action-btn {
+    position: relative !important;
+}
+.btn-large {
+    float: right !important;
+    margin-top: 15px !important;
+}
+.card .card-content {
+    padding: 7px !important;
+}
+.card .card-image img {
+    height: 221px;
+}
+
+img.responsive-img.thumbnail {
+    width: 156px;
+    height: 138px;
+    float: left;
+    margin: 21px 11px 0px 0px;
+}
+i.material-icons.dp48 {
+    color: #039be5;
+    FONT-SIZE: 31px;
+}
+span.thumbnail {
+float: left;
+position: absolute;
+}
+.pagination li.active {
+    background-color: #ee6e73;
+    padding: 4px 9px 0px 10px;
+}   
+
+.footer-copyright {
+    margin-top: 83px;
+}
+@media only screen and (max-width: 600px) {
+img.responsive-img.thumbnail {
+    width: auto;
+    height: auto;
+    float: none;
+}
+}
+
+

@@ -21,6 +21,7 @@ urlpatterns = [
         views.DeletePost.as_view(),
         name="delete"
     ),
+     
      path('<int:course_pk>/<int:step_pk>/', views.StepDetailView.as_view(),
      name='step'),
      path('create/', views.CreatePost.as_view(), name="create_course"),
