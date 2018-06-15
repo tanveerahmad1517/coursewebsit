@@ -141,6 +141,12 @@ if not DEBUG:
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'assets', 'media')
 
-
-
 LOGIN_REDIRECT_URL = 'courses:course_list'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = 'tanveer1236'
+EMAIL_HOST_USER = 'tanveerobjects@gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
