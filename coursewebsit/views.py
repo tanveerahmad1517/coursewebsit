@@ -28,9 +28,9 @@ class SignUpView(CreateView):
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
 
-def myprofileview(request, username):
-    user = User.objects.get(user = request.user)
-    return rende(request,'profile.html',{'user':user})
+# def myprofileview(request, username):
+#     user = User.objects.get(user = request.user)
+#     return rende(request,'profile.html',{'user':user})
     
 
 
