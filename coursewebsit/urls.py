@@ -1,5 +1,6 @@
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.urls import path
 # from django.conf.urls import handler404, handler500
 from .views import SearchView
 from .import views
@@ -7,19 +8,17 @@ from django.views.generic import View
 from django.conf import settings
 from django.views.static import serve
 from django.contrib.auth.views import LoginView, LogoutView, password_reset, PasswordChangeView, PasswordChangeDoneView
-
-from django.urls import include, path
-
 from coursewebsit.forms import EmailValidationOnForgotPassword
 
 urlpatterns = [
     url(r"^admin/", admin.site.urls),
     #url(r"^accounts/", include("accounts.urls", namespace="accounts")),
     #url(r"^accounts/", include("django.contrib.auth.urls")),
-    path('', include("courses.urls")),
+
+    url(r"^courses/", include("courses.urls")),
+
     path('accounts/login/', LoginView.as_view(redirect_authenticated_user=True), name='login'),
-    path('search/', SearchView.as_view(), name='search'),
-    path('accounts/password_reset/', PasswordResetView.as_view(), kwargs={
+    path('accounts/password_reset/', password_reset, kwargs={
       'post_reset_redirect': '/accounts/password_reset/done/',
       'password_reset_form':EmailValidationOnForgotPassword}, name='login'),
     url(r'^password/change/$', 
