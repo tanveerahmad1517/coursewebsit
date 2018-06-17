@@ -124,10 +124,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 if not DEBUG:
     MEDIA_URL = '/media/'
-    STATIC_ROOT = "/home/tanveerdd/coursewebsit/assets/staticssss/"
+    STATIC_ROOT = "/home/tanveerdd/coursewebsit/assets/static/"
     MEDIA_ROOT = "/home/tanveerdd/coursewebsit/assets/media/"
     STATICFILES_DIRS = (
-        "/home/tanveerdd/coursewebsit/staticssss/",
+        "/home/tanveerdd/coursewebsit/static/",
     )
     TEPLATE_DIRS = (
         "/home/tanveerdd/myblogproject/assets/templates"
@@ -141,7 +141,7 @@ if not DEBUG:
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'assets', 'media')
 
-LOGIN_REDIRECT_URL = 'courses:course_listffffffffffffffffff'
+LOGIN_REDIRECT_URL = 'courses:course_list'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
