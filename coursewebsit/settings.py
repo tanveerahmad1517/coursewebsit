@@ -23,7 +23,7 @@ SECRET_KEY = ')j-z7eeab=y+1#$ptk=137%(6_-c=07d*(o96x18oe*dx0+da)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-TEMPLATE_DEBUG = False
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -132,11 +132,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'assets', 'media')
 
 LOGIN_REDIRECT_URL = 'courses:course_list'
 
-
-<<<<<<< HEAD
-LOGIN_REDIRECT_URL = 'courses:course_list'
-=======
->>>>>>> 5550486a0ece2aa7888d87844f3bcc4ae7e461eb
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_PASSWORD = 'tanveer1236'
