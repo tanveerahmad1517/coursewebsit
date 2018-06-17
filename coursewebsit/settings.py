@@ -22,9 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ')j-z7eeab=y+1#$ptk=137%(6_-c=07d*(o96x18oe*dx0+da)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ["tanveerdd.pythonanywhere.com"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -119,28 +120,22 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-# STATIC_ROOT = os.path.join(BASE_DIR, 'assets', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-if not DEBUG:
-    MEDIA_URL = '/media/'
-    STATIC_ROOT = "/home/tanveerdd/coursewebsit/assets/static/"
-    MEDIA_ROOT = "/home/tanveerdd/coursewebsit/assets/media/"
-    STATICFILES_DIRS = (
-        "/home/tanveerdd/coursewebsit/assets/static/",
-    )
-    TEPLATE_DIRS = (
-        "/home/tanveerdd/coursewebsit/assets/templates"
-    )
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'assets'),
+]
 
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'assets'),
-# ]
-
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'assets', 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'assets', 'media')
 
 
 
 LOGIN_REDIRECT_URL = 'courses:course_list'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = 'tanveer1236'
+EMAIL_HOST_USER = 'tanveerobjects@gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

@@ -30,7 +30,8 @@
 
        <li><a href="{% url 'courses:create_course'%}">Create Post</a></li>
 
-       <li><a href="{% url 'logout' %}"> Logout </a></li>        	
+       <li><a href="{% url 'logout' %}"> Logout </a></li> 
+       <li><a href="{% url 'password_change' %}"> Change Password </a></li>        	
        {% else %}
        <li> <a href="{% url 'login' %}">Log in </a></li>
        <li> <a href="{% url 'password_reset' %}">Lost password?</a>

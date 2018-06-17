@@ -7,7 +7,7 @@ from .import views
 from django.views.generic import View
 from django.conf import settings
 from django.views.static import serve
-from django.contrib.auth.views import LoginView, LogoutView, password_reset
+from django.contrib.auth.views import LoginView, LogoutView, password_reset, PasswordChangeView, PasswordChangeDoneView
 from coursewebsit.forms import EmailValidationOnForgotPassword
 
 urlpatterns = [
@@ -21,6 +21,12 @@ urlpatterns = [
     path('accounts/password_reset/', password_reset, kwargs={
       'post_reset_redirect': '/accounts/password/reset/done/',
       'password_reset_form':EmailValidationOnForgotPassword}, name='login'),
+    url(r'^password/change/$', 
+        PasswordChangeView.as_view(), 
+        name='password_change'),
+url(r'^password/change/done/$',
+        PasswordChangeDoneView.as_view(), 
+        name='password_change_done'),
     
     path('search/', SearchView.as_view(), name='search'), 
     path('accounts/signup/', views.SignUpView.as_view(), name="signup"),
