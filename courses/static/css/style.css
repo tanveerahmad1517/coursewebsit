@@ -30,6 +30,9 @@ input.btn.btn-default {
  .form-group {
     float: left !important;
 }
+i.fa {
+    font-size: 48px;
+}
 
 img.teacher_img {
 	height: 70px;

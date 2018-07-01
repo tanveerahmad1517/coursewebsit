@@ -22,7 +22,9 @@
 .footer-copyright a {
     color: blue;
 }
-
+i.fa {
+    font-size: 48px;
+}
 input.btn.btn-default {
     float: left;
     margin-top: 17px;
@@ -87,7 +89,7 @@ position: absolute;
 .pagination li.active {
     background-color: #ee6e73;
     padding: 4px 9px 0px 10px;
-}   
+}
 
 .footer-copyright {
     margin-top: 83px;

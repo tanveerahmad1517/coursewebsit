@@ -2,9 +2,38 @@
 {% block title %} {{ course.title }} {% endblock %}
 {% block course_content %}
 {% load namify %}
+{% load urlify %}
+{% load font_awesome %}
+{% fa_css %}
+
+{# Display an icon #}
+
+
 </div><br>
 <div class="container">
  <div class="row">
+
+<p>
+<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+{% fa 'Facebook-Square' %}
+
+</a>
+
+<a href="https://twitter.com/home?status={{ object.content|truncatechars:80|urlify }}%20{{ request.build_absolute_uri }}">
+{% fa 'twitter-square' %}
+</a>
+
+<a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>
+
+
+<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ object.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">
+
+{% fa 'linkedin-square' %}
+</a>
+
+<a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">{% fa 'reddit-square' %}</a>
+
+</p>
   
   <nav>
     <div class="nav-wrapper">
