@@ -6,6 +6,10 @@
   <form method="post" enctype="multipart/form-data">
       <div class="row">
      <div class="input-field col s12">
+        {% render_field form.user|add_class:'select-dropdown dropdown-trigger' %}
+        <label for="title"> User </label>
+     </div><br>
+     <div class="input-field col s12">
         {% render_field form.title|add_class:'validate' %}
         <label for="title"> Title </label>
      </div>
@@ -17,7 +21,19 @@
      <div class="input-field col s12">
        {% render_field form.teacher|add_class:'select-dropdown dropdown-trigger'  %}
        <label for="title"> Teacher </label>
-         </div>
+     </div>
+     </div>
+     <div class="input-field col s12">
+        {% render_field form.active|add_class:'filled-in' %}
+        <label for="title"> Active </label>
+     </div><br>
+     <div class="input-field col s12">
+        {% render_field form.category|add_class:'select-dropdown dropdown-trigger' %}
+        <label for="title"> Category </label>
+     </div>
+     <div class="input-field col s12">
+        {% render_field form.default|add_class:'select-dropdown dropdown-trigger' %}
+        <label for="title"> Default Category </label>
      </div>
  <div class="file-field input-field cols12 m12">
 
@@ -29,6 +45,10 @@
   <input class="file-path validate" type="text">
 </div>
 </div>
+<div class="input-field col s12">
+        {% render_field form.slug|add_class:'validate' %}
+        <label for="title"> slug </label>
+     </div>
     <button type="submit" class="btn btn-success">
         <span class="glyphicon glyphicon-ok"></span> Save
     </button>

@@ -116,7 +116,7 @@ class CreateStep(LoginRequiredMixin, CreateView):
 
 class EditView(LoginRequiredMixin, UpdateView):
 	model = Course
-	fields = ['title', 'description', 'teacher', 'image']
+	fields = ['user', 'title', 'description', 'teacher', 'image', 'active', 'category', 'default', 'slug']
 	template_name = 'courses/edit_course.html'
 
 

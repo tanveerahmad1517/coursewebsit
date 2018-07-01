@@ -5,7 +5,7 @@ from .models import Course, Teacher
 
 class PostForm(forms.ModelForm):
     class Meta:
-        fields = ("title", "description", "teacher", "image")
+        fields = ("user", "title", "description", "teacher", "image", "active", "category", "default", "slug")
         model = Course
 
     def __init__(self, *args, **kwargs):
