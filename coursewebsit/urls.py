@@ -12,10 +12,11 @@ from coursewebsit.forms import EmailValidationOnForgotPassword
 
 urlpatterns = [
     url(r"^admin/", admin.site.urls),
+    path('search/', SearchView.as_view(), name='search'), 
     #url(r"^accounts/", include("accounts.urls", namespace="accounts")),
     #url(r"^accounts/", include("django.contrib.auth.urls")),
 
-    url(r"^courses/", include("courses.urls")),
+    url(r"", include("courses.urls")),
 
     path('accounts/login/', LoginView.as_view(redirect_authenticated_user=True), name='login'),
     path('accounts/password_reset/', password_reset, kwargs={
@@ -28,7 +29,7 @@ url(r'^password/change/done/$',
         PasswordChangeDoneView.as_view(), 
         name='password_change_done'),
     
-    path('search/', SearchView.as_view(), name='search'), 
+    
     path('accounts/signup/', views.SignUpView.as_view(), name="signup"),
     # url(r'^profile/(?P<username>\w+)/$', views.myprofileview, name="detail_profile")
 ]

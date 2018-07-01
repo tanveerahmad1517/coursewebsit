@@ -16,11 +16,7 @@ urlpatterns = [
         views.SinglePost.as_view(),
         name="single"
     ),
-    url(
-        r"delete/(?P<pk>\d+)/$",
-        views.DeletePost.as_view(),
-        name="delete"
-    ),
+    
      
      path('<int:course_pk>/<int:step_pk>/', views.StepDetailView.as_view(),
      name='step'),
@@ -28,10 +24,13 @@ urlpatterns = [
      path('step-create/', views.CreateStep.as_view(), name="step_create"),
      path('edit-course/<int:pk>/', views.EditView.as_view(), name="edit_course"),
      path('edit-step/<int:pk>/', views.EditView.as_view(), name="edit_step"),
-     path('delete-<int:step_pk>/edit-step/<int:pk>/', views.DeleteView.as_view(), name="delete_course"),
+     path('delete/<int:pk>/', views.DeleteView.as_view(), name="delete_course"),
 
-path('delete/<int:course_pk>/<int:step_pk>/', views.DeleteStepDetail.as_view(), name='delete_step_detail'),     path('<int:pk>/', views.CourseDetailView.as_view(), name='course_detail'),
+# path('delete/<int:pk>/<int:step_pk>/', views.DeleteStepDetail.as_view(), name='delete_step_detail'),     
+# path('<int:pk>/', views.course_detail, name='course_detail'),
      path('my-courses/', views.MyView.as_view(), name="myview"),
      path('edit-step/<int:course_pk>/<int:step_pk>/', views.EditStepDetail.as_view(), name='edit_step_detail'),
 
+      url(r'^(?P<slug>[\w-]+)/$', views.CourseDetailView.as_view(), name="course_detail"),
+      url(r'^category/(?P<hierarchy>.+)/$', views.show_category, name='category'),
 ]

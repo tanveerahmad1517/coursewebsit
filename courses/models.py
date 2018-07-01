@@ -5,10 +5,61 @@ from django.db import models
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-import misaka
+from mptt.models import MPTTModel, TreeForeignKey
+
 import os
+from django.contrib.contenttypes.models import ContentType
+class CourseQuerySet(models.query.QuerySet):
+    def active(self):
+        return self.filter(active=True)
+
+class CourseManager(models.Manager):
+    def get_queryset(self):
+        return CourseQuerySet(self.model, using=self._db)
+
+    def all(self, *args, **kwargs):
+        return self.get_queryset().active()
+
+    def get_related(self, instance):
+        courses_one = self.get_queryset().filter(category=instance.category)
+        courses_two = self.get_queryset().filter(default=instance.default)
+        qs = (courses_one | courses_two).exclude(id=instance.id).distinct()
+        return qs
+
+
 def get_image_path(instance, filename):
     return os.path.join('course_image', str(instance.title), filename)
+
+class Category(MPTTModel):
+  name = models.CharField(max_length=50, unique=True)
+  parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children', db_index=True)
+  slug = models.SlugField()
+
+  class MPTTMeta:
+    order_insertion_by = ['name']
+
+  class Meta:
+    unique_together = (('parent', 'slug',))
+    verbose_name_plural = 'categories'
+
+  def get_slug_list(self):
+    try:
+      ancestors = self.get_ancestors(include_self=True)
+    except:
+      ancestors = []
+    else:
+      ancestors = [ i.slug for i in ancestors]
+    slugs = []
+    for i in range(len(ancestors)):
+      slugs.append('/'.join(ancestors[:i+1]))
+    return slugs
+
+  def __str__(self):
+    return self.name
+
+
+
+
 
 class Course(models.Model):
 
@@ -19,24 +70,36 @@ class Course(models.Model):
     description = models.TextField()
     teacher = models.ForeignKey('Teacher',  related_name='teahcers', on_delete=models.CASCADE, default='Select Teacher')
     image = models.ImageField(upload_to=get_image_path, default='media/default.png')
-    def save(self, *args, **kwargs):
-        self.title_html = misaka.html(self.title)
-        super().save(*args, **kwargs)
+    active = models.BooleanField(default=True)
+    category = TreeForeignKey('Category', on_delete=models.CASCADE, null=True,blank=True)
+    default = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='default_category', null=True, blank=True)
+    slug = models.SlugField()
+    objects = CourseManager()
+    class Meta:
+        ordering = ["-title"]
+
+    def get_related_courses_by_tags(self):
+        return Course.objects.filter(tags__in=self.tags.all())
+    # @property
+    # def comments(self):
+    #     instance = self
+    #     qs = Comment.objects.filter_by_instance(instance)
+
+    # @property
+    # def get_content_type(self):
+    #     instance = self 
+    #     content_type = ContentType.objects.get_for_model(instance.__class__)
+    #     return content_type
   
     
     def __str__(self):
         return self.title
     def get_absolute_url(self):
-        return reverse(
-            "courses:single",
-            kwargs={
-                "username": self.user.username,
-                "pk": self.pk
-            }
-        )
+        return reverse("courses:course_detail", kwargs={"slug": self.slug})
 
-    class Meta:
-        ordering = ["-created_at"]
+
+    # class Meta:
+    #     ordering = ["-created_at"]
 
 class Step(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -79,3 +142,5 @@ def create_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
 
 post_save.connect(create_user_profile, sender=User)
+
+

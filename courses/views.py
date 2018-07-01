@@ -8,12 +8,16 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from braces.views import SelectRelatedMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
-from .models import Course, Step
+from .models import Course, Step, Category
 from django.shortcuts import render, get_object_or_404
 from . import forms
+from courses.forms import CommentForm
+
+
 
 class AllPosts(ListView):
     model = Course
+
     paginate_by = 6
 class UserPosts(ListView):
     model = Course
@@ -47,9 +51,54 @@ class SinglePost(DetailView):
         )
 
 
+# class CourseDetailView(DetailView):
+# 	model = Course
+# 	template_name = 'courses/course_detail.html'
+
+# def course_detail(request,slug=None):
+#     course = get_object_or_404(Course,slug=slug)
+#     return render(request, "posts/detail.html", { 'course':course})
+
+
+
+
+
+
+# class CommentFormView(CreateView):
+#     model = Course 
+#     template_name = 'courses/course_detail.html'
+#     form_class = CommentForm
+
+
+# def course_detail(request,slug=None):
+#     course = get_object_or_404(Course,slug=slug)
+#     category_posts = Category.objects.all()
+#     return render(request, 'courses/course_detail.html', {'course': course, 'category_posts': category_posts})
+#     comment_form = CommentForm(request.Post or None, initial=initial_data)
+#     if comment_form.is_valid():
+#         print(comment_form.cleaned_data)
+#     comments = instance.comments
+#     context = {
+#     "title": instance.title,
+#     "course": course,
+#     "comments": comments,
+#     "comment_form": comment_form
+#     }
+
+import random
 class CourseDetailView(DetailView):
-	model = Course
-	template_name = 'courses/course_detail.html'
+    model = Course
+    # context_object_name = 'instance'
+    template_name = "courses/course_detail.html"
+    #template_name = "<appname>/<modelname>_detail.html"
+    def get_context_data(self, *args, **kwargs):
+        context = super(CourseDetailView, self).get_context_data(*args, **kwargs)
+        instance = self.get_object()
+        #order_by("-title")
+        context["related"] = sorted(Course.objects.get_related(instance)[:6], key= lambda x: random.random())
+        return context
+
+
 
 class StepDetailView(DetailView):
 	model = Step 
@@ -89,7 +138,7 @@ class CreatePost(LoginRequiredMixin, CreateView):
 
 
 
-class DeletePost(LoginRequiredMixin, DeleteView):
+class DeleteView(LoginRequiredMixin, DeleteView):
     model = Course
     success_url = reverse_lazy("courses:course_list")
 
@@ -146,3 +195,20 @@ def error_404(request):
 def error_500(request):
         data = {}
         return render(request,'courses/error_500.html', data)    
+
+def show_category(request,hierarchy= None):
+    category_slug = hierarchy.split('/')
+    parent = None
+    root = Category.objects.all()
+
+    for slug in category_slug[:-1]:
+        parent = root.get(parent=parent, slug = slug)
+
+    try:
+        course = Category.objects.get(parent=parent,slug=category_slug[-1])
+    except:
+        course = get_object_or_404(Course, slug = category_slug[-1])
+        return render(request, "courses/course_detail.html", {'course':course})
+    else:
+        return render(request, 'courses/course_detail.html', {'course':course})
+ 

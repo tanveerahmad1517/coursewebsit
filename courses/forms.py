@@ -12,3 +12,7 @@ class PostForm(forms.ModelForm):
         user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)
 
+class CommentForm(forms.Form):
+	content_type = forms.CharField(widget=forms.HiddenInput)
+	object_id = forms.IntegerField(widget=forms.HiddenInput)
+	content = forms.CharField(widget=forms.Textarea)
