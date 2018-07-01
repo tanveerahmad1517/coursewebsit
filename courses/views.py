@@ -210,5 +210,5 @@ def show_category(request,hierarchy= None):
         course = get_object_or_404(Course, slug = category_slug[-1])
         return render(request, "courses/course_detail.html", {'course':course})
     else:
-        return render(request, 'courses/course_detail.html', {'course':course})
+        return render(request, 'courses/categories.html', {'course':course})
  
