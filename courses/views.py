@@ -13,8 +13,6 @@ from django.shortcuts import render, get_object_or_404
 from . import forms
 from courses.forms import CommentForm
 
-
-
 class AllPosts(ListView):
     model = Course
 
@@ -59,11 +57,6 @@ class SinglePost(DetailView):
 #     course = get_object_or_404(Course,slug=slug)
 #     return render(request, "posts/detail.html", { 'course':course})
 
-
-
-
-
-
 # class CommentFormView(CreateView):
 #     model = Course 
 #     template_name = 'courses/course_detail.html'
@@ -98,25 +91,21 @@ class CourseDetailView(DetailView):
         context["related"] = sorted(Course.objects.get_related(instance)[:6], key= lambda x: random.random())
         return context
 
+# class StepDetailView(DetailView):
+# 	model = Step 
+# 	template_name = 'courses/step_detail.html'
+# 	def get_object(self):
+# 		step = get_object_or_404(Step, pk=self.kwargs['step_pk'])
+# 		return step
 
-
-class StepDetailView(DetailView):
-	model = Step 
-	template_name = 'courses/step_detail.html'
-	def get_object(self):
-		step = get_object_or_404(Step, pk=self.kwargs['step_pk'])
-		return step
-
-class CreateStep(LoginRequiredMixin, CreateView):
-    model = Step
-    fields = '__all__'
-    template_name = "courses/create_step.html"
-
-
+# class CreateStep(LoginRequiredMixin, CreateView):
+#     model = Step
+#     fields = '__all__'
+#     template_name = "courses/create_step.html"
 
 class EditView(LoginRequiredMixin, UpdateView):
 	model = Course
-	fields = ['user', 'title', 'description', 'teacher', 'image', 'active', 'category', 'default', 'slug']
+	form_class = forms.PostForm
 	template_name = 'courses/edit_course.html'
 
 
@@ -136,48 +125,41 @@ class CreatePost(LoginRequiredMixin, CreateView):
         self.object.save()
         return super().form_valid(form)
 
-
-
 class DeleteView(LoginRequiredMixin, DeleteView):
     model = Course
     success_url = reverse_lazy("courses:course_list")
 
-
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(user_id=self.request.user.id)
-
     def delete(self, *args, **kwargs):
         messages.success(self.request, "Message successfully deleted")
         return super().delete(*args, **kwargs)
-
 class EditView(LoginRequiredMixin, UpdateView):
     model = Course
-    fields = ['title', 'description', 'teacher', 'image']
+    form_class = forms.PostForm
     template_name = 'courses/edit_course.html'
 
-
-class EditStep(UpdateView):
-    model = Step
-    fields = '__all__'
-    template_name = 'courses/edit_step.html'
-    def get_success_url(self):
-        return reverse_lazy('course_detail',kwargs={'pk': self.get_object().id})
-class EditStepDetail(UpdateView):
-    model = Step
-    fields = '__all__'
-    template_name = 'courses/edit_step_detail.html'
-    def get_object(self):
-        step = get_object_or_404(Step, pk=self.kwargs['step_pk'])
-        return step
-class DeleteStepDetail(DetailView):
-    model = Step
-    fields = '__all__'
-    template_name = 'courses/course_confirm_delete.html'
-    def get_object(self):
-        step = get_object_or_404(Step, pk=self.kwargs['step_pk'])
-        return step
-
+# class EditStep(UpdateView):
+#     model = Step
+#     fields = '__all__'
+#     template_name = 'courses/edit_step.html'
+#     def get_success_url(self):
+#         return reverse_lazy('course_detail',kwargs={'pk': self.get_object().id})
+# class EditStepDetail(UpdateView):
+#     model = Step
+#     fields = '__all__'
+#     template_name = 'courses/edit_step_detail.html'
+#     def get_object(self):
+#         step = get_object_or_404(Step, pk=self.kwargs['step_pk'])
+#         return step
+# class DeleteStepDetail(DetailView):
+#     model = Step
+#     fields = '__all__'
+#     template_name = 'courses/course_confirm_delete.html'
+#     def get_object(self):
+#         step = get_object_or_404(Step, pk=self.kwargs['step_pk'])
+#         return step
 
 class MyView(AllPosts):
     def get_queryset(self):
