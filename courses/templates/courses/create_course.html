@@ -14,8 +14,12 @@
         <label for="title"> Title </label>
      </div>
      <div class="input-field col s12">
+      <label for="title"> Description </label>
+      <br><br>
+         {{ form.media }}
        {% render_field form.description|add_class:'materialize-textarea'  %}
-       <label for="title"> Description </label>
+
+       
          
      </div>
      <div class="input-field col s12">

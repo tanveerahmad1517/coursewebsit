@@ -1,0 +1,15 @@
+{% extends "courses/layout.html" %}
+{% block course_content %}
+<div class="container">
+	<div class="row">
+<h1>Contact</h1>
+  <form role="form" action="" method="post">
+  {% csrf_token %}
+  {{ form.as_p }} 
+  <button type="submit" class="btn btn-success">
+        <span class="glyphicon glyphicon-ok"></span> Submit
+    </button>   
+  </form>
+  <br>
+</div></div>
+{% endblock %}

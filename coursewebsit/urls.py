@@ -9,10 +9,14 @@ from django.conf import settings
 from django.views.static import serve
 from django.contrib.auth.views import LoginView, LogoutView, password_reset, PasswordChangeView, PasswordChangeDoneView
 from coursewebsit.forms import EmailValidationOnForgotPassword
-
+from filebrowser.sites import site
 urlpatterns = [
     url(r"^admin/", admin.site.urls),
+    url(r'^admin/filebrowser/', site.urls),
+    path('tinymce/', include('tinymce.urls')),
     path('search/', SearchView.as_view(), name='search'), 
+    path('contact/', views.contact, name='contact'),
+    path('success/', views.successView, name='success'),
     #url(r"^accounts/", include("accounts.urls", namespace="accounts")),
     #url(r"^accounts/", include("django.contrib.auth.urls")),
 

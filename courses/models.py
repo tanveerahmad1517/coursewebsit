@@ -6,7 +6,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from mptt.models import MPTTModel, TreeForeignKey
-
+from tinymce import HTMLField
 import os
 from django.contrib.contenttypes.models import ContentType
 class CourseQuerySet(models.query.QuerySet):
@@ -67,7 +67,7 @@ class Course(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     title = models.TextField()
     title_html = models.TextField(editable=False)
-    description = models.TextField()
+    description = HTMLField('Description')
     teacher = models.ForeignKey('Teacher',  related_name='teahcers', on_delete=models.CASCADE, default='Select Teacher')
     image = models.ImageField(upload_to=get_image_path, default='media/default.png')
     active = models.BooleanField(default=True)

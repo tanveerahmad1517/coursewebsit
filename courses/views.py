@@ -13,6 +13,7 @@ from django.shortcuts import render, get_object_or_404
 from . import forms
 from courses.forms import CommentForm
 
+
 class AllPosts(ListView):
     model = Course
 
