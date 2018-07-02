@@ -15,6 +15,8 @@ urlpatterns = [
     url(r'^admin/filebrowser/', site.urls),
     path('tinymce/', include('tinymce.urls')),
     path('search/', SearchView.as_view(), name='search'), 
+    path('maps/', views.poi_list, name='map_list'), 
+    
     path('contact/', views.contact, name='contact'),
     path('success/', views.successView, name='success'),
     #url(r"^accounts/", include("accounts.urls", namespace="accounts")),

@@ -45,9 +45,22 @@ INSTALLED_APPS = [
     'fa',
     'filebrowser',
     'tinymce',
+    'geoposition',
 
 
 ]
+
+GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyAUTzFIlhYQySB_2uGRqU4Pu6VrczP-zpw'
+
+GEOPOSITION_MAP_OPTIONS = {
+    'minZoom': 3,
+    'maxZoom': 15,
+}
+
+GEOPOSITION_MARKER_OPTIONS = {
+    'cursor': 'move'
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,6 +89,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'coursewebsit.wsgi.application'
 

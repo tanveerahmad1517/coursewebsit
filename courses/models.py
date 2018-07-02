@@ -9,6 +9,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 from tinymce import HTMLField
 import os
 from django.contrib.contenttypes.models import ContentType
+from geoposition.fields import GeopositionField
 class CourseQuerySet(models.query.QuerySet):
     def active(self):
         return self.filter(active=True)
@@ -144,3 +145,13 @@ def create_user_profile(sender, instance, created, **kwargs):
 post_save.connect(create_user_profile, sender=User)
 
 
+
+class PointOfInterest(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=50)
+    zipcode = models.CharField(max_length=10)
+    position = GeopositionField(blank=True)
+
+    class Meta:
+        verbose_name_plural = 'points of interest'

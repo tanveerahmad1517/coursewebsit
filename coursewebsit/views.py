@@ -15,6 +15,13 @@ from django.contrib.auth import get_user_model
 from coursewebsit.forms import ContactForm
 from django.template.loader import get_template
 from django.core.mail import EmailMessage
+from courses.models import PointOfInterest
+
+def poi_list(request):
+    pois = PointOfInterest.objects.all()
+    return render(request, 'poi_list.html', {'pois': pois})
+
+
 class SearchView(View):
     def get(self, request, *args, **kwargs):
         query = request.GET.get("q")
@@ -38,6 +45,7 @@ class SignUpView(CreateView):
 
 def contact(request):
     form_class = ContactForm
+    pois = PointOfInterest.objects.all()
 
     # new logic!
     if request.method == 'POST':
@@ -73,7 +81,7 @@ def contact(request):
             return redirect('success')
 
     return render(request, 'contactus.html', {
-        'form': form_class,
+        'form': form_class, 'pois': pois
     })
 
 def successView(request):
