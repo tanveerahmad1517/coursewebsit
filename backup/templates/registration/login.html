@@ -1,0 +1,39 @@
+{% extends "courses/layout.html" %}
+
+{% load widget_tweaks %}
+{% block course_content %}
+<div class="container">
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+<br>
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<div class="username">
+    {{ form.username.label_tag }}
+    {{ form.username }}
+</div>
+<div class="password">
+
+   {{ form.password.label_tag }}
+    {{ form.password }}
+</div>
+<button class="waves-effect waves-light btn" type="submit" /> Login </button
+
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+</div>
+{% endblock %}

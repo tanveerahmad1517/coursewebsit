@@ -1,0 +1,42 @@
+{% if  course.children.all %}
+    <h4>Sub Categories</h4>
+    {% for i in course.children.all %}
+        <a href="{{ i.slug }}"> {{ i.name }} </a><br>
+    {% endfor %}
+
+    <br><hr>
+{% endif %}
+
+{% if  course.course_set.all %}
+ {% for i in course.course_set.all %}
+  <h4>courses</h4>
+ <div class="col s12 m4">
+   <div class="card">
+ <div class="card-image">
+             <img src="{{ i.image.url }}" height="270">
+        <h5>
+          <a href="{{ i.slug }}">
+       {{ i.title }} </a>
+        </h5>
+         
+    </div>
+   
+
+        
+ </div>
+<div class="card-content">
+            <p> {{ i.description|slice:"100" }}<a href="{{ i.slug }}"> Read More </a></p> 
+</div>
+ <div class="card-action">
+          
+        </div>
+ </div> 
+</div>
+{% if forloop.counter|divisibleby:3 and not forloop.last %}
+        </div><br><div class="row">
+      {% endif %}
+  
+{% endfor %}
+
+{% endif %}
+</div>

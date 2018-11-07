@@ -1,0 +1,77 @@
+{% load humanize %}
+{% load static from staticfiles %}
+ <div class="container">
+ 	 <div class="row">
+
+
+{% for course in course_list %}
+	</a>
+  <div class="col s12 m4">
+   <div class="card">
+ <div class="card-image">
+             <img src="{{ course.image.url }}" height="270">
+        <h5>
+           <a href="{% url 'courses:course_detail' course.slug %}">
+			 {{ course.title }} </a>
+        </h5>
+         {% if user.is_authenticated and course.user == user and not hide_delete %}
+   <div class="fixed-action-btn toolbar direction-top" style="transition: transform 0.2s; transform: translate3d(0px, 0px, 0px);">
+      <a class="btn-floating btn-large red" style="transition: transform 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19); transform: translate3d(0px, 0px, 0px);">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+      <ul>
+        <li class="waves-effect waves-light"><a href="#!" style=""><i class="material-icons">insert_chart</i></a></li>
+        <li class="waves-effect waves-light"><a href="{% url 'courses:edit_course' course.pk %}" style=""><i class="material-icons dp48">edit</i></a></li>
+        <li class="waves-effect waves-light"><a href="{% url 'courses:delete_course' course.pk %}" style=""><i class="material-icons dp48">delete</i></a></li>
+        <li class="waves-effect waves-light"><a href="" style=""><i class="material-icons">attach_file</i></a></li>
+      </ul>
+    </div>
+        {% endif %}
+
+        
+ </div>
+<div class="card-content">
+            <p> {{ course.description|slice:"100" }}<a href="{% url 'courses:course_detail' course.slug %}"> Read More </a></p> 
+</div>
+ <div class="card-action">
+          
+        </div>
+ </div> 
+</div>
+{% if forloop.counter|divisibleby:3 and not forloop.last %}
+        </div><br><div class="row">
+      {% endif %}
+		
+	{% endfor %}
+
+</div>
+<ul class="pagination">
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li class="waves-effect"><a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+
+    {% else %}
+      <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active">{{ i }} </li>
+      {% else %}
+        <li class="waves-effect"><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+    <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+     
+    {% else %}
+      <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+
+</div>
+</div>
+
+

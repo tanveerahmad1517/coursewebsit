@@ -1,0 +1,38 @@
+{% extends "courses/base.html" %}
+
+<style>
+#tweet-container {
+
+}
+</style>
+
+
+
+{% block content %}
+
+    <div class="container">
+
+   
+    <div class='row'>
+        <div class='col-sm-12'>
+               {% if request.GET.q %}
+                <p class='lead'>Results for <b> {{ request.GET.q }} </b> </p>
+                <hr/>
+               {% endif %}
+        </div>
+      </div>
+    
+
+        <div class='col-sm-12'>
+          <h1>Course</h1>
+           <hr/>
+          {% for course in courses %}
+           <h5> <a href="{% url 'courses:course_detail' course.slug %}"> {{course.title}} </a> </h5>
+
+          {% empty %}
+          <p>No users found</p>
+          {% endfor %}
+        </div>
+    </div></div>
+
+{% endblock content %}

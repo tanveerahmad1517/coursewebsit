@@ -1,0 +1,9 @@
+certifi==2018.4.16
+Django==2.0
+django-widget-tweaks==1.4.1
+django-tinymce4-lite==1.7.0
+Pillow==5.0.0
+pytz==2017.3
+pyenchant
+django-filebrowser-no-grappelli
+jsmin

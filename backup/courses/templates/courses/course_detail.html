@@ -1,0 +1,111 @@
+{% extends "courses/layout.html" %}
+{% block title %} {{ course.title }} {% endblock %}
+{% block course_content %}
+{% load namify %}
+{% load urlify %}
+{% load font_awesome %}
+{% fa_css %}
+
+{# Display an icon #}
+
+
+</div><br>
+<div class="container">
+ <div class="row">
+
+<p>
+<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+{% fa 'Facebook-Square' %}
+
+</a>
+
+<a href="https://twitter.com/home?status={{ object.content|truncatechars:80|urlify }}%20{{ request.build_absolute_uri }}">
+{% fa 'twitter-square' %}
+</a>
+
+<a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>
+
+
+<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ object.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">
+
+{% fa 'linkedin-square' %}
+</a>
+
+<a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">{% fa 'reddit-square' %}</a>
+
+</p>
+  
+  <nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+    <a href="/" class="breadcrumb">Home</a>
+     
+    {% for i in course.category.get_slug_list %}
+       <a class="breadcrumb" href="/category/{{ i }}">{{ i | get_name }}</a>
+
+    {% endfor %}
+         <span class="breadcrumb"> {{ course.title | safe |slice:"70"  }} </span>
+</div></div></nav>
+    <div class="cover_img">
+         <img class="responsive-img" src="{{ course.image.url }}" height="150">
+    </div>
+  <div class="col s12 col m8"> 
+
+        <h3> About This Course </h3>
+
+{% if  course.course_set.all %}
+ {% for i in course.course_set.all %}
+  <h4>courses</h4>
+  <div class="row small-up-1 medium-up-3" >
+
+   <div class="column">
+    <a href="{{ i.slug }}">
+      <div class="card" style="width: 300px; border-color: black">
+         <div class="card-divider">
+           <strong>{{ i.title | truncatechars:30}}</strong>
+         </div>
+
+         <div class="card-section">
+          <small>{{ i.publish}} </small>
+          <p>{{ i.content | safe | truncatechars_html:120 }}</p>
+         </div>
+   
+     </div>
+  </a></div>
+  </div>
+  
+{% endfor %}
+
+{% endif %}
+
+        <h4> {{ course.title }} </h4>
+            <p> {{ course.description }} </p>
+            <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+       <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numcourses="5"></div>
+ </div>
+
+                     
+ <div class="col s12 col m4"> 
+       
+
+          <h4> Teacher </h4>
+          <h5>  {{ course.teacher.name }}</h5>
+         <img class="responsive-img circle teacher_img" src="{{ course.teacher.image.url }}" height="150">
+            <p> {{ course.teacher.description }} </p>
+
+</div></div></div>
+
+    <br><hr>
+<div class="container">
+<div class='row'>
+  <h1> Related Courses </h1>
+  {% for related_course in related %}
+
+    {% include "courses/course_thumbnail.html" with related_course=related_course %}
+
+  <!--   {% cycle '' '</div><div class="row">' %} -->
+  {% endfor %}
+</div></div>
+{% endblock %}
+
+

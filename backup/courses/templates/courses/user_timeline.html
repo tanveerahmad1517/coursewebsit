@@ -1,0 +1,21 @@
+{% extends "courses/layout.html" %}
+{% block pre_course_content %}
+ <div class="container">
+  <div class="row">
+	<h4>{{ course_user.get_short_name }}</h4>
+    <strong>@{{ course_user.username }}</strong>
+    <br>
+    {{ course.user.email }}
+    {{ course_user.bio }}
+    {{ course_user.user.email }}
+    </div>
+</div>
+{% endblock %}
+ 
+
+{% block course_content %}
+
+		{% include "courses/_course.html" %}
+
+
+{% endblock %}
