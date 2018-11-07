@@ -1,0 +1,47 @@
+# Python compiled byte code
+*.pyc
+
+# SQLite3 database
+
+# Staticfiles
+staticfiles/
+
+# Compiled messages
+*.mo
+
+# Log files
+*.log
+
+# IDE files
+.idea
+*.iml
+*.ipr
+*.iws
+.settings
+.project
+.pydevproject
+.directory
+
+# Script for different environments
+prod.sh
+dev.sh
+
+# Static files collected
+/static
+
+# dotenv
+.env
+
+# virtualenv
+.venv/
+venv/
+ENV/
+
+# Database stuff
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media
