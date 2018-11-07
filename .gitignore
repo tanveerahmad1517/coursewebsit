@@ -29,19 +29,9 @@ dev.sh
 # Static files collected
 /static
 
-# dotenv
+# Virtual environments
+venv
+venv?.?
 .env
-
-# virtualenv
-.venv/
-venv/
-ENV/
-
-# Database stuff
-*.log
-*.pot
-*.pyc
-__pycache__/
-local_settings.py
 db.sqlite3
-media
+db.sqlite3
